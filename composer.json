@@ -1,0 +1,27 @@
+{
+  "name": "innocode-digital/wp-rest-endpoint-admin-bar",
+  "version": "0.0.1",
+  "type": "wordpress-muplugin",
+  "license": "GPL-2.0+",
+  "require": {
+    "php": ">=7.1",
+    "composer/installers": "~1.0"
+  },
+  "description": ".",
+  "autoload": {
+    "psr-4": {
+      "Innocode\\RESTEndpointAdminBar\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Innocode",
+      "email": "post@innocode.no",
+      "homepage": "https://innocode.com/"
+    },
+    {
+      "name": "Viktor Kuliebiakin",
+      "email": "kuliebiakin@gmail.com"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+@keyframes innocode-json-bar-gradient {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+#wpadminbar.innocode-json-bar_is-loading {
+    background: #1d2327 linear-gradient(-90deg, rgba(0, 0, 0, 0), rgba(240, 246, 252, 0.3), rgba(0, 0, 0, 0)) repeat-x;
+    background-size: 200% 100%;
+    animation: innocode-json-bar-gradient 1s linear infinite;
+}

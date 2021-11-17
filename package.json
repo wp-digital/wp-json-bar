@@ -1,0 +1,36 @@
+{
+  "name": "wp-json-bar",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "build:css": "csso ./public/css/style.css --output ./public/css/style.min.css",
+    "build:js": "uglifyjs ./public/js/admin-bar.js -c -m -o ./public/js/admin-bar.min.js && uglifyjs ./public/js/main.js -c -m -o ./public/js/main.min.js",
+    "build": "npm run build:css && npm run build:js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innocode-digital/wp-json-bar.git"
+  },
+  "author": {
+    "name": "Innocode",
+    "email": "post@innocode.no",
+    "homepage": "https://innocode.com/"
+  },
+  "contributors": [
+    {
+      "name": "Viktor Kuliebiakin",
+      "email": "kuliebiakin@gmail.com"
+    }
+  ],
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/innocode-digital/wp-json-bar/issues"
+  },
+  "homepage": "https://github.com/innocode-digital/wp-json-bar#readme",
+  "devDependencies": {
+    "csso-cli": "^3.0.0",
+    "uglify-js": "^3.14.3"
+  },
+  "dependencies": {}
+}

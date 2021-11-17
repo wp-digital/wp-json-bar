@@ -1,6 +1,6 @@
 <?php
 
-namespace Innocode\RESTEndpointAdminBar;
+namespace Innocode\JSONBar;
 
 class AdminBar
 {

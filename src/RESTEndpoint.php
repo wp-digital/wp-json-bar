@@ -1,6 +1,6 @@
 <?php
 
-namespace Innocode\RESTEndpointAdminBar;
+namespace Innocode\JSONBar;
 
 use WP_Error;
 
@@ -134,7 +134,11 @@ class RESTEndpoint
             $this->restore_real_header( 'HTTP_ACCEPT' );
             $this->restore_real_header( 'CONTENT_TYPE' );
         } else {
-            $admin_bar->render();
+            $admin_bar->check_permissions();
+
+            if ( $admin_bar->is_showing() ) {
+                $admin_bar->render();
+            }
         }
 
         if ( ! $admin_bar->is_showing() ) {

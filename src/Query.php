@@ -4,7 +4,7 @@ namespace Innocode\JSONBar;
 
 use WP_Error;
 
-class RESTEndpoint
+class Query
 {
     /**
      * @var string
@@ -47,9 +47,9 @@ class RESTEndpoint
     /**
      * @return string|null
      */
-    public function get_route() : ?string
+    public function is_var_exists() : ?string
     {
-        return get_query_var( $this->get_name(), null );
+        return null !== get_query_var( $this->get_name(), null );
     }
 
     /**
@@ -99,14 +99,20 @@ class RESTEndpoint
         return $value;
     }
 
-    public function add_rewrite_endpoints()
+    /**
+     * @param array $public_query_vars
+     * @return array
+     */
+    public function add_query_vars( array $public_query_vars ) : array
     {
-        add_rewrite_endpoint( $this->get_name(), EP_ALL );
+        $public_query_vars[] = $this->get_name();
+
+        return $public_query_vars;
     }
 
     public function handle_request()
     {
-        if ( null === $this->get_route() ) {
+        if ( ! $this->is_var_exists() ) {
             return;
         }
 

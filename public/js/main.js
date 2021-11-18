@@ -65,22 +65,10 @@
             polling.adminBar.className += ' innocode-json-bar_is-loading';
 
             var urlParts = polling.href.split('?');
-            var baseURL = urlParts[0];
-            var query = urlParts[1] ? urlParts[1] : '';
-            var url = '';
+            var url = urlParts[0] + '?' + settings.query_var + '=true';
 
-            if (settings.permalink_structure) {
-                url += baseURL.replace(/\/$/, '') + '/' + settings.endpoint + '/';
-
-                if (query) {
-                    url += '?' + query;
-                }
-            } else {
-                url += '?' + settings.endpoint;
-
-                if (query) {
-                    url += '&' + query;
-                }
+            if (urlParts[1]) {
+                url += '&' + urlParts[1];
             }
 
             if (polling.xhr !== null) {

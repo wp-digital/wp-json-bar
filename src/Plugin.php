@@ -5,9 +5,9 @@ namespace Innocode\JSONBar;
 final class Plugin
 {
     /**
-     * @var RESTEndpoint
+     * @var Query
      */
-    private $rest_endpoint;
+    private $query;
     /**
      * @var string
      */
@@ -18,23 +18,23 @@ final class Plugin
     private $version;
 
     /**
-     * @param string $endpoint
+     * @param string $query_var
      * @param string $file
      * @param string $version
      */
-    public function __construct( string $endpoint, string $file, string $version )
+    public function __construct( string $query_var, string $file, string $version )
     {
-        $this->rest_endpoint = new RESTEndpoint( $endpoint );
+        $this->query = new Query( $query_var );
         $this->file = $file;
         $this->version = $version;
     }
 
     /**
-     * @return RESTEndpoint
+     * @return Query
      */
-    public function get_rest_endpoint() : RESTEndpoint
+    public function get_query() : Query
     {
-        return $this->rest_endpoint;
+        return $this->query;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Plugin
 
     public function run()
     {
-        $rest_endpoint = $this->get_rest_endpoint();
+        $query = $this->get_query();
 
-        add_action( 'init', [ $rest_endpoint, 'add_rewrite_endpoints' ] );
-        add_action( 'template_redirect', [ $rest_endpoint, 'handle_request' ] );
+        add_action( 'query_vars', [ $query, 'add_query_vars' ] );
+        add_action( 'template_redirect', [ $query, 'handle_request' ] );
 
         add_action( 'admin_bar_init', [ $this, 'enqueue_scripts' ] );
     }
@@ -108,10 +108,9 @@ final class Plugin
         wp_add_inline_script(
             'innocode-json-bar',
             'var innocodeJSONBar = ' . json_encode( [
-                'endpoint'            => $this->get_rest_endpoint()->get_name(),
-                'nonce'               => wp_create_nonce( 'wp_rest' ),
-                'permalink_structure' => get_option( 'permalink_structure' ),
-                'interval'            => apply_filters( 'innocode_json_bar_polling_interval', 1 ), // Polling interval in seconds.
+                'query_var' => $this->get_query()->get_name(),
+                'nonce'     => wp_create_nonce( 'wp_rest' ),
+                'interval'  => apply_filters( 'innocode_json_bar_polling_interval', 1 ), // Polling interval in seconds.
             ] ),
             'before'
         );
